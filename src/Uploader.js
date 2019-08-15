@@ -13,45 +13,13 @@ class Uploader extends Component {
         this.img = new Image();
         this.img.src = reader.result;
         this.img.onload = () => {
-          this.drawCanvas(this.img)
+          this.props.onUpload(this.img)
         }
     }
     acceptedFiles.forEach(file => reader.readAsDataURL(file))
   }
-
-  drawCanvas(img) {
-    let width = img.naturalWidth;
-    let height = img.naturalHeight;
-    this.refs.canvasCopy.width = width;
-    this.refs.canvasCopy.height = height;
-    this.ctx = this.refs.canvasCopy.getContext('2d');
-    this.ctx.clearRect(0, 0, width, height);            
-    this.ctx.drawImage(img, 0, 0, width, height);
-    
-    // Linear gradient
-    this.gradient = this.ctx.createLinearGradient(0,height, width,height);
-
-    // Set color stops (depending on direction)
-    if(this.props.direction == "left") {
-      this.gradient.addColorStop(this.props.gradient, 'rgba(255, 255, 255, 0)');        
-      this.gradient.addColorStop(1, 'rgba(255, 255, 255, 1)');
-    }
-    else {
-      this.gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');        
-      this.gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
-    }
-        
-    // Set the fill style and draw a rectangle
-    this.ctx.fillStyle = this.gradient;
-    this.ctx.fillRect(0, 0, width, height);
-  }  
   render() {    
-    // this.drawCanvas()
-    if(this.img !== undefined) {
-      this.drawCanvas(this.img);
-    }
     return (
-      
       <div>        
         <Dropzone onDrop={(d) => this.onDrop(d)}>
           {({getRootProps, getInputProps}) => (          
@@ -63,11 +31,6 @@ class Uploader extends Component {
             </section>
           )}
         </Dropzone>
-        
-        <div style={{mixBlendMode:"multiply"}}>
-          <canvas id="canvas" ref="canvasCopy" style={{position:'absolute', top:'0px', right:'0px'}}/>
-        </div>
-        
       </div>
     )
   }
