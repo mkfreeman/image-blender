@@ -20,15 +20,19 @@ export default function ImageControls(props) {
         props.toggleChange(newAlignment);
     };
     return(
-        <div class="container" style={{width:"100px"}}>
+        <div class="container" style={{width:"200px"}}>
+            <span>Gradient Location</span>
             <Slider value = {props.sliderValue} min={0} max={1} step={.01 } 
                 onChange={ (e, val) => props.sliderChange(val) }                     
             />
+            <span>Gradient Direction</span>
             <ToggleButtonGroup value={props.toggleValue} exclusive onChange={handleChange}>
                 <ToggleButton value="left">Left</ToggleButton>
                 <ToggleButton value="right">Right</ToggleButton>
             </ToggleButtonGroup>
-            <AnglePicker/>
+            <br/>
+            <span>Rotation Angle</span>
+            <AnglePicker onChange = {(val) => props.angleChange(val)}/>
         </div>
     )
 }

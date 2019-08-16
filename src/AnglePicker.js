@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 class AnglePicker extends Component {
     constructor(props) {
         super(props);
-        this.state = {angle:270}
+        this.state = {angle:0}
     }
     updateAngle(pt){
-        console.log(pt.nativeEvent.offsetX, pt.nativeEvent.offsetY)
-        let dx = 100 - pt.nativeEvent.offsetX;
-        let dy = 100 -pt.nativeEvent.offsetY;
+        let dx = this.props.radius + 5 - pt.nativeEvent.offsetX;
+        let dy = this.props.radius + 5 -pt.nativeEvent.offsetY;
         let angle = Math.atan2(dy, dx) * (180 / Math.PI) - 90;
+        this.props.onChange(angle);
         this.setState(
             {angle:angle}
         )
@@ -28,8 +28,8 @@ class AnglePicker extends Component {
         let pos = this.calculatePosition();
         return(
             <svg>
-                <g transform={"translate(100, 100)"}>
-                    <circle r={this.props.radius} style={{opacity:.3}} onMouseMove = {(val) => this.updateAngle(val)}/>
+                <g transform={`translate(${this.props.radius + 5}, ${this.props.radius + 5})`}>
+                    <circle r={this.props.radius} style={{opacity:.2}} onMouseMove = {(val) => this.updateAngle(val)}/>
                     <line x0={pos.x0} x1={pos.x1} y0={pos.y0} y1={pos.y1} style={{stroke:"black"}}/>
                 </g>
             </svg>
@@ -38,6 +38,6 @@ class AnglePicker extends Component {
 }
 
 AnglePicker.defaultProps = {
-    radius:100
+    radius:50
 }
 export default AnglePicker;

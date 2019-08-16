@@ -6,12 +6,14 @@ class ImageLayer extends Component {
         super(props);
         this.state = {
             gradient:.9, 
-            direction:"right"
+            direction:"right", 
+            angle:0
         }
         this.handleControlChange.bind(this);
     }
     
     drawCanvas(img) {
+        console.log("draw image", this.state.angle)
         this.img = img;
         let width = img.naturalWidth;
         let height = img.naturalHeight;
@@ -19,14 +21,13 @@ class ImageLayer extends Component {
         this.refs.canvasCopy.height = height;
         this.ctx = this.refs.canvasCopy.getContext('2d');
         this.ctx.clearRect(0, 0, width, height);            
-        this.ctx.drawImage(img, 0, 0, width, height);
+        
         
         // Linear gradient
-        this.gradient = this.ctx.createLinearGradient(0,height, width,height);
+        this.gradient = this.ctx.createLinearGradient(0,height/2, width,height/2);
     
         // Set color stops (depending on direction)
         if(this.state.direction == "left") {
-            console.log("this.state.gradient", this.state.gradient)
           this.gradient.addColorStop(this.state.gradient, 'rgba(255, 255, 255, 0)');        
           this.gradient.addColorStop(1, 'rgba(255, 255, 255, 1)');
         }
@@ -34,19 +35,30 @@ class ImageLayer extends Component {
           this.gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');        
           this.gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
         }
+                    
+
+        // Move registration point to the center of the canvas
+        this.ctx.translate(width/2, height/2);
             
+        // Rotate 1 degree
+        this.ctx.rotate(this.state.angle * Math.PI / 180);
+            
+        // Move registration point back to the top left corner of canvas
+        this.ctx.translate(-width/2, -height/2);
+
         // Set the fill style and draw a rectangle
+        
+        this.ctx.drawImage(img, 0, 0, width, height);
         this.ctx.fillStyle = this.gradient;
         this.ctx.fillRect(0, 0, width, height);
     } 
     handleControlChange(id, val) {
+        console.log("control chnage", id, val)
         let newState = {};
         newState[id] = val;
-        console.log("new state", newState, id, val)
         this.setState(newState)
     }    
     render() {
-        console.log("render!")
         if(this.img !== undefined) {
             this.drawCanvas(this.img);
         }
@@ -60,7 +72,9 @@ class ImageLayer extends Component {
                     sliderChange = {(val) => this.handleControlChange("gradient", val)}
                     sliderValue = {this.state.gradient}
                     toggleValue = {this.state.direction}
-                    toggleChange = {(val) => this.handleControlChange("direction", val)}/>
+                    toggleChange = {(val) => this.handleControlChange("direction", val)}
+                    angleChange = {(val) => this.handleControlChange("angle", val)}     
+                />
             </div>
             
         )
