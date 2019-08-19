@@ -23,11 +23,11 @@ class ControlPanel extends Component {
         this.setState(obj);
     }
     render() {
-        return(
-            <div class="container" style={{width:"100px"}}>
-                <Slider min={0} max={1} step={.01 } 
-                    onChange={ (e, val) => this.props.handleSliderChange(val) }                     
-                    />
+        return (
+            <div class="container" style={{ width: "100px" }}>
+                <Slider min={0} max={1} step={.01}
+                    onChange={(e, val) => this.props.handleSliderChange(val)}
+                />
             </div>
         )
     }

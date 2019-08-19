@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import Uploader from "./Uploader";
 import ImageControls from "./ImageControls";
+
 class ImageLayer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            gradient: .9,
+            gradient: 0.9,
             direction: "right",
             angle: 0,
             fitToScreen: true,
-            width: window.innerWidth,
+            width: window.innerWidth - 250,
             height: window.innerHeight - 20
         }
         this.handleControlChange.bind(this);
@@ -42,16 +43,15 @@ class ImageLayer extends Component {
     }
     // Render the image
     drawCanvas(img) {
-        console.log("draw image", this.state.angle);
+        console.log("draw image", this.props.outputCanvas);
+        let canvas = document.getElementById(this.props.outputCanvas);
         let dims = this.getDimensions(img);
         this.img = img;
         let width = dims.width;
         let height = dims.height;
-        this.refs.canvasCopy.width = width;
-        this.refs.canvasCopy.height = height;
-        this.ctx = this.refs.canvasCopy.getContext('2d');
-        this.ctx.clearRect(0, 0, width, height);
-
+        canvas.width = width;
+        canvas.height = height;
+        this.ctx = canvas.getContext('2d');
 
         // Linear gradient
         this.gradient = this.ctx.createLinearGradient(0, height / 2, width, height / 2);
@@ -95,9 +95,6 @@ class ImageLayer extends Component {
         return (
             <div>
                 <Uploader onUpload={(val) => this.drawCanvas(val)} />
-                <div style={{ mixBlendMode: "multiply" }}>
-                    <canvas id="canvas" ref="canvasCopy" style={{ position: 'absolute', top: '0px', right: '0px' }} />
-                </div>
                 <ImageControls
                     sliderChange={(val) => this.handleControlChange("gradient", val)}
                     sliderValue={this.state.gradient}
