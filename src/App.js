@@ -1,3 +1,4 @@
+"use strict";
 import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import './App.css';
@@ -5,13 +6,14 @@ import ImageLayer from "./ImageLayer";
 import domtoimage from 'dom-to-image'; // didn't work
 import { saveAs } from 'file-saver';
 import Button from '@material-ui/core/Button';
-
+import AppControls from "./AppControls";
 class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            imageLayers: 1
-        }
+            imageLayers: 1,
+            blendMode: "multiply"
+        };
     }
     download() {
         domtoimage.toBlob(document.getElementById('canvasContainer'))
@@ -24,6 +26,12 @@ class App extends Component {
             imageLayers: this.state.imageLayers + 1
         });
     }
+    handleControlChange(id, val) {
+        console.log("change", id, val)
+        let newState = {};
+        newState[id] = val;
+        this.setState(newState);
+    }
     render() {
         return (
             <MuiThemeProvider>
@@ -35,20 +43,19 @@ class App extends Component {
                         </div>
                         <div id="content" >
                             {Array.from(Array(this.state.imageLayers).keys()).map((d, i) => {
-                                return (<ImageLayer onAdd={() => this.addLayer()} outputCanvas={"canvas" + i} />)
+                                return (<ImageLayer key={d} onAdd={() => this.addLayer()} outputCanvas={"canvas" + i} />)
                             })
                             }
                         </div>
+                        <AppControls value={this.state.blendMode} update={(val) => this.handleControlChange("blendMode", val)} />
                     </div>
-                    <div id="canvasContainer" style={{ top: '0px', left: '250px', position: "absolute", mixBlendMode: "multiply" }}>
+                    <div id="canvasContainer" style={{ top: '0px', left: '250px', position: "absolute", mixBlendMode: this.state.blendMode }}>
                         {Array.from(Array(this.state.imageLayers).keys()).map((d, i) => {
                             return (
-                                <canvas id={"canvas" + i} style={{ position: 'absolute', top: '0px', left: '0px', mixBlendMode: "multiply" }} />
+                                <canvas key={d} id={"canvas" + i} style={{ position: 'absolute', top: '0px', left: '0px', mixBlendMode: this.state.blendMode }} />
                             )
                         })
                         }
-
-                        <canvas id="canvas2" style={{ position: 'absolute', top: '0px', left: '0px', mixBlendMode: "multiply" }} />
                     </div>
                     <Button id="download" color="primary" variant="contained" onClick={() => this.download()}>Download</Button>
                 </div>

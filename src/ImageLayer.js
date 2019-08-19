@@ -86,10 +86,9 @@ class ImageLayer extends Component {
         }
     }
     handleControlChange(id, val) {
-        console.log("control chnage", id, val)
         let newState = {};
         newState[id] = val;
-        this.setState(newState)
+        this.setState(newState);
     }
     render() {
         console.log(typeof (this.state.img))
