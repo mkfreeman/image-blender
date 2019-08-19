@@ -9,12 +9,20 @@ import Button from '@material-ui/core/Button';
 class App extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            imageLayers: 1
+        }
     }
     download() {
         domtoimage.toBlob(document.getElementById('canvasContainer'))
             .then(function (blob) {
                 saveAs(blob, 'blended-images.png');
             });
+    }
+    addLayer() {
+        this.setState({
+            imageLayers: this.state.imageLayers + 1
+        });
     }
     render() {
         return (
@@ -26,12 +34,20 @@ class App extends Component {
                             <p>Layer and blend images</p>
                         </div>
                         <div id="content" >
-                            <ImageLayer outputCanvas={"canvas1"} />
-                            <ImageLayer outputCanvas={"canvas2"} />
+                            {Array.from(Array(this.state.imageLayers).keys()).map((d, i) => {
+                                return (<ImageLayer onAdd={() => this.addLayer()} outputCanvas={"canvas" + i} />)
+                            })
+                            }
                         </div>
                     </div>
                     <div id="canvasContainer" style={{ top: '0px', left: '250px', position: "absolute", mixBlendMode: "multiply" }}>
-                        <canvas id="canvas1" style={{ position: 'absolute', top: '0px', left: '0px', mixBlendMode: "multiply" }} />
+                        {Array.from(Array(this.state.imageLayers).keys()).map((d, i) => {
+                            return (
+                                <canvas id={"canvas" + i} style={{ position: 'absolute', top: '0px', left: '0px', mixBlendMode: "multiply" }} />
+                            )
+                        })
+                        }
+
                         <canvas id="canvas2" style={{ position: 'absolute', top: '0px', left: '0px', mixBlendMode: "multiply" }} />
                     </div>
                     <Button id="download" color="primary" variant="contained" onClick={() => this.download()}>Download</Button>

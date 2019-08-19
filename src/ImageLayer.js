@@ -6,7 +6,7 @@ class ImageLayer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            gradient: 0.9,
+            gradient: 0.5,
             direction: "left",
             angle: 0,
             fitToScreen: true,
@@ -81,6 +81,7 @@ class ImageLayer extends Component {
         this.ctx.fillRect(0, 0, width, height);
 
         if (typeof (this.state.img) === "undefined") {
+            this.props.onAdd();
             this.setState({ img: img });
         }
     }
@@ -97,7 +98,9 @@ class ImageLayer extends Component {
         }
         return (
             <div>
-                <Uploader onUpload={(val) => this.drawCanvas(val)} />
+                {typeof (this.state.img) === "undefined" &&
+                    <Uploader onUpload={(val) => this.drawCanvas(val)} />
+                }
                 {typeof (this.state.img) !== "undefined" &&
                     <ImageControls
                         sliderChange={(val) => this.handleControlChange("gradient", val)}
