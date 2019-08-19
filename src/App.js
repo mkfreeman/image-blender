@@ -3,9 +3,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import './App.css';
 import ImageLayer from "./ImageLayer";
 import domtoimage from 'dom-to-image'; // didn't work
-import html2canvas from 'html2canvas';// didn't work
-import htmlToImage from 'html-to-image';
 import { saveAs } from 'file-saver';
+import Button from '@material-ui/core/Button';
 
 class App extends Component {
     constructor(props) {
@@ -30,12 +29,12 @@ class App extends Component {
                             <ImageLayer outputCanvas={"canvas1"} />
                             <ImageLayer outputCanvas={"canvas2"} />
                         </div>
-                        <button id="download" onClick={() => this.download()}>Download</button>
                     </div>
                     <div id="canvasContainer" style={{ top: '0px', left: '250px', position: "absolute", mixBlendMode: "multiply" }}>
                         <canvas id="canvas1" style={{ position: 'absolute', top: '0px', left: '0px', mixBlendMode: "multiply" }} />
                         <canvas id="canvas2" style={{ position: 'absolute', top: '0px', left: '0px', mixBlendMode: "multiply" }} />
                     </div>
+                    <Button id="download" color="primary" variant="contained" onClick={() => this.download()}>Download</Button>
                 </div>
             </MuiThemeProvider>
         )

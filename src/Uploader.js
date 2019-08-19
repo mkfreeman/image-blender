@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import Dropzone from 'react-dropzone'
+import Icon from '@material-ui/core/Icon';
+import Button from '@material-ui/core/Button';
 
 class Uploader extends Component {
   constructor(props) {
@@ -18,15 +20,16 @@ class Uploader extends Component {
     }
     acceptedFiles.forEach(file => reader.readAsDataURL(file))
   }
-  render() {    
+  render() {
+    // const classes = useStyles();
     return (
       <div>        
         <Dropzone onDrop={(d) => this.onDrop(d)}>
           {({getRootProps, getInputProps}) => (          
             <section>
-              <div {...getRootProps()}>
+              <div {...getRootProps({className: 'dropzone'})}>
                 <input {...getInputProps()} />
-                <p>Drag 'n' drop some files here, or click to select files</p>
+                <p><Button><Icon color="primary" fontSize="large">add_circle</Icon></Button>...</p>
               </div>
             </section>
           )}

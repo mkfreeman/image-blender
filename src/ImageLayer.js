@@ -7,7 +7,7 @@ class ImageLayer extends Component {
         super(props);
         this.state = {
             gradient: 0.9,
-            direction: "right",
+            direction: "left",
             angle: 0,
             fitToScreen: true,
             width: window.innerWidth - 250,
@@ -43,10 +43,8 @@ class ImageLayer extends Component {
     }
     // Render the image
     drawCanvas(img) {
-        console.log("draw image", this.props.outputCanvas);
         let canvas = document.getElementById(this.props.outputCanvas);
         let dims = this.getDimensions(img);
-        this.img = img;
         let width = dims.width;
         let height = dims.height;
         canvas.width = width;
@@ -63,7 +61,7 @@ class ImageLayer extends Component {
         }
         else {
             this.gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
-            this.gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+            this.gradient.addColorStop(this.state.gradient, 'rgba(255, 255, 255, 0)');
         }
 
 
@@ -81,6 +79,10 @@ class ImageLayer extends Component {
         this.ctx.drawImage(img, 0, 0, width, height);
         this.ctx.fillStyle = this.gradient;
         this.ctx.fillRect(0, 0, width, height);
+
+        if (typeof (this.state.img) === "undefined") {
+            this.setState({ img: img });
+        }
     }
     handleControlChange(id, val) {
         console.log("control chnage", id, val)
@@ -89,19 +91,22 @@ class ImageLayer extends Component {
         this.setState(newState)
     }
     render() {
-        if (this.img !== undefined) {
-            this.drawCanvas(this.img);
+        console.log(typeof (this.state.img))
+        if (typeof (this.state.img) !== "undefined") {
+            this.drawCanvas(this.state.img);
         }
         return (
             <div>
                 <Uploader onUpload={(val) => this.drawCanvas(val)} />
-                <ImageControls
-                    sliderChange={(val) => this.handleControlChange("gradient", val)}
-                    sliderValue={this.state.gradient}
-                    toggleValue={this.state.direction}
-                    toggleChange={(val) => this.handleControlChange("direction", val)}
-                    angleChange={(val) => this.handleControlChange("angle", val)}
-                />
+                {typeof (this.state.img) !== "undefined" &&
+                    <ImageControls
+                        sliderChange={(val) => this.handleControlChange("gradient", val)}
+                        sliderValue={this.state.gradient}
+                        toggleValue={this.state.direction}
+                        toggleChange={(val) => this.handleControlChange("direction", val)}
+                        angleChange={(val) => this.handleControlChange("angle", val)}
+                    />
+                }
             </div>
 
         )
