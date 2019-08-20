@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "b290c9e247c4082cb6c1a4248e434d2e",
+    "revision": "2f1d406c175b39464c4c772c1a972be5",
     "url": "/image-blender/index.html"
   },
   {
