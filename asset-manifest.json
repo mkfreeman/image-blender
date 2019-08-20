@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/image-blender/static/css/main.f3ebd138.chunk.css",
-    "main.js": "/image-blender/static/js/main.4c06883d.chunk.js",
-    "main.js.map": "/image-blender/static/js/main.4c06883d.chunk.js.map",
+    "main.css": "/image-blender/static/css/main.8d5268f1.chunk.css",
+    "main.js": "/image-blender/static/js/main.c6db838b.chunk.js",
+    "main.js.map": "/image-blender/static/js/main.c6db838b.chunk.js.map",
     "runtime~main.js": "/image-blender/static/js/runtime~main.65c365ce.js",
     "runtime~main.js.map": "/image-blender/static/js/runtime~main.65c365ce.js.map",
     "static/js/2.45eebc8c.chunk.js": "/image-blender/static/js/2.45eebc8c.chunk.js",
     "static/js/2.45eebc8c.chunk.js.map": "/image-blender/static/js/2.45eebc8c.chunk.js.map",
     "index.html": "/image-blender/index.html",
-    "precache-manifest.75a38a268ba7048ac7620f52aff0376c.js": "/image-blender/precache-manifest.75a38a268ba7048ac7620f52aff0376c.js",
+    "precache-manifest.6a0567a33c112e7ccc787e2fd25774a2.js": "/image-blender/precache-manifest.6a0567a33c112e7ccc787e2fd25774a2.js",
     "service-worker.js": "/image-blender/service-worker.js",
-    "static/css/main.f3ebd138.chunk.css.map": "/image-blender/static/css/main.f3ebd138.chunk.css.map"
+    "static/css/main.8d5268f1.chunk.css.map": "/image-blender/static/css/main.8d5268f1.chunk.css.map"
   }
 }
