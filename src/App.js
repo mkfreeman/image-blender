@@ -19,7 +19,15 @@ class App extends Component {
         };
     }
     download() {
-        domtoimage.toBlob(document.getElementById('canvasContainer'))
+        let el = document.getElementById('canvasContainer');
+        domtoimage.toBlob(el, {
+            style: {
+                left: '0px',
+                right: '0px',
+                bottom: '0px',
+                top: '0px'
+            }
+        })
             .then(function (blob) {
                 saveAs(blob, 'blended-images.png');
             });
@@ -37,7 +45,7 @@ class App extends Component {
     render() {
         return (
             <MuiThemeProvider>
-                <div>
+                <div style={{ position: "relative" }}>
                     <div id="sideBar" style={{ width: "262px", height: "95vh" }}>
                         <div id="title">
                             <h1>Image Blender</h1>
@@ -83,7 +91,7 @@ class App extends Component {
                                 padding: "50px",
                                 verticalAlign: "middle"
                             }}>
-                                <div style={{ opacity: .6, backgroundColor: this.state.backgroundColor, height: "100vh", paddingTop: "50vh" }}>
+                                <div style={{ opacity: .6, backgroundColor: this.state.backgroundColor, height: "100vh", paddingTop: "40vh" }}>
                                     <div>Use the control panel to upload and manipulate layers of draggable images.</div>
                                 </div>
                             </div>
