@@ -1,44 +1,48 @@
 {
-  "name": "image-blender",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@material-ui/core": "^4.3.2",
-    "@material-ui/lab": "^4.0.0-alpha.23",
-    "dom-to-image": "^2.6.0",
-    "file-saver": "^2.0.2",
-    "html-to-image": "^0.1.1",
-    "html2canvas": "^1.0.0-rc.3",
-    "material-ui": "^0.20.2",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-draggable": "^3.3.2",
-    "react-dropzone": "^10.1.7",
-    "react-scripts": "3.0.1",
-    "typescript": "^3.5.3"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "devDependencies": {
-    "@types/file-saver": "^2.0.1"
-  }
+    "name": "image-blender",
+    "version": "0.1.0",
+    "private": true,
+    "homepage": "http://mfviz.com/image-blender",
+    "dependencies": {
+        "@material-ui/core": "^4.3.2",
+        "@material-ui/lab": "^4.0.0-alpha.23",
+        "dom-to-image": "^2.6.0",
+        "file-saver": "^2.0.2",
+        "html-to-image": "^0.1.1",
+        "html2canvas": "^1.0.0-rc.3",
+        "material-ui": "^0.20.2",
+        "react": "^16.8.6",
+        "react-dom": "^16.8.6",
+        "react-draggable": "^3.3.2",
+        "react-dropzone": "^10.1.7",
+        "react-scripts": "3.0.1",
+        "typescript": "^3.5.3"
+    },
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject",
+        "predeploy": "npm run build",
+        "deploy": "gh-pages -d build"
+    },
+    "eslintConfig": {
+        "extends": "react-app"
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "devDependencies": {
+        "@types/file-saver": "^2.0.1",
+        "gh-pages": "^2.1.1"
+    }
 }
