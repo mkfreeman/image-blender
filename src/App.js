@@ -8,7 +8,7 @@ import { saveAs } from 'file-saver';
 import Button from '@material-ui/core/Button';
 import AppControls from "./AppControls";
 import Draggable from 'react-draggable';
-
+import Footer from "./Footer";
 class App extends Component {
     constructor(props) {
         super(props);
@@ -38,7 +38,7 @@ class App extends Component {
         return (
             <MuiThemeProvider>
                 <div>
-                    <div id="sideBar" style={{ width: "240px", padding: "10px", height: "95vh" }}>
+                    <div id="sideBar" style={{ width: "262px", height: "95vh" }}>
                         <div id="title">
                             <h1>Image Blender</h1>
                             <p>Layer and blend images</p>
@@ -57,11 +57,11 @@ class App extends Component {
                     <div id="canvasContainer"
                         style={{
                             overflow: "hidden",
-                            top: '0px',
-                            left: '266px',
+                            top: '10px',
+                            left: '276px',
                             position: "absolute",
-                            width: window.innerWidth - 266,
-                            height: window.innerHeight - 20,
+                            width: window.innerWidth - 285,
+                            height: window.innerHeight - 30,
                             mixBlendMode: this.state.blendMode,
                             backgroundColor: this.state.backgroundColor
                         }}
@@ -76,10 +76,11 @@ class App extends Component {
                         }
                         {this.state.imageLayers === 1 &&
                             <div style={{
-                                width: window.innerWidth * 0.9 - 350,
+                                width: window.innerWidth * 0.8 - 350,
                                 height: window.innerHeight - 50,
                                 textAlign: "center",
                                 margin: "auto",
+                                padding: "50px",
                                 verticalAlign: "middle"
                             }}>
                                 <div style={{ opacity: .6, backgroundColor: this.state.backgroundColor, height: "100vh", paddingTop: "50vh" }}>
@@ -91,6 +92,7 @@ class App extends Component {
                     </div>
                     <Button id="download" color="primary" variant="contained" onClick={() => this.download()}>Download</Button>
                 </div>
+                <Footer />
             </MuiThemeProvider >
         )
     }

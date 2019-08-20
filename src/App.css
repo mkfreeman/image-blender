@@ -27,19 +27,23 @@
 }
 
 #content {
-    margin-top:100px;
+    margin-top:100px;    
 }
 
 #sideBar {
     border-right:1px solid #d3d3d3;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 10px, rgba(0, 0, 0, 0.23) 0px 3px 10px;
-    height: 100vh;    
+    height: 100vh;   
     overflow: scroll;
+    padding-left: 10px;
+    padding-right:10px;
+    padding-bottom:200px;
+    box-sizing: border-box;
 }
 
 #download {
     float:"right";
     position: fixed;
-    bottom:10px;
+    bottom:50px;
     right:10px;
 }

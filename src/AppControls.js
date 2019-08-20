@@ -34,11 +34,11 @@ class AppControls extends Component {
                 <br />
                 <br />
                 <div>
-                    <InputLabel htmlFor="color">Background Color</InputLabel>
+                    <InputLabel htmlFor="color" style={{ marginBottom: "3px", marginRight: "3px", display: 'inline-block' }}>Background Color: </InputLabel>
                     <input type="color" name="color" value={this.props.backgroundColor} onChange={(e, val) => this.props.update("backgroundColor", e.target.value)} />
                 </div>
 
-            </div>
+            </div >
         )
     }
 }
