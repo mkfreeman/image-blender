@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/image-blender/static/css/main.d7db19f3.chunk.css",
+    "main.js": "/image-blender/static/js/main.e48160e0.chunk.js",
+    "main.js.map": "/image-blender/static/js/main.e48160e0.chunk.js.map",
+    "runtime~main.js": "/image-blender/static/js/runtime~main.65c365ce.js",
+    "runtime~main.js.map": "/image-blender/static/js/runtime~main.65c365ce.js.map",
+    "static/js/2.1356a85b.chunk.js": "/image-blender/static/js/2.1356a85b.chunk.js",
+    "static/js/2.1356a85b.chunk.js.map": "/image-blender/static/js/2.1356a85b.chunk.js.map",
+    "index.html": "/image-blender/index.html",
+    "precache-manifest.baeb756ca7a2765bd7e6b2e95bf5da32.js": "/image-blender/precache-manifest.baeb756ca7a2765bd7e6b2e95bf5da32.js",
+    "service-worker.js": "/image-blender/service-worker.js",
+    "static/css/main.d7db19f3.chunk.css.map": "/image-blender/static/css/main.d7db19f3.chunk.css.map"
+  }
+}
