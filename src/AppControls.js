@@ -26,11 +26,18 @@ class AppControls extends Component {
         return (
             <div>
                 <InputLabel htmlFor="blend-mode">Blending Technique</InputLabel>
-                <Select name="blend-mode" value={this.props.value} onChange={(e, val) => this.props.update(e.target.value)}>
+                <Select name="blend-mode" value={this.props.value} onChange={(e, val) => this.props.update("blendMode", e.target.value)}>
                     {options.map((d) =>
-                        <option key={d} value={d}>{d.charAt(0).toUpperCase() + d.slice(1)}</option>
+                        <option key={d} value={d} style={{ cursor: "pointer" }}>{d.charAt(0).toUpperCase() + d.slice(1)}</option>
                     )}
                 </Select>
+                <br />
+                <br />
+                <div>
+                    <InputLabel htmlFor="color">Background Color</InputLabel>
+                    <input type="color" name="color" value={this.props.backgroundColor} onChange={(e, val) => this.props.update("backgroundColor", e.target.value)} />
+                </div>
+
             </div>
         )
     }

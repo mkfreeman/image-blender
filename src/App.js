@@ -14,7 +14,8 @@ class App extends Component {
         super(props);
         this.state = {
             imageLayers: 1,
-            blendMode: "multiply"
+            blendMode: "multiply",
+            backgroundColor: "#d3d3d3"
         };
     }
     download() {
@@ -48,9 +49,10 @@ class App extends Component {
                             })
                             }
                             <hr></hr>
+                            <br />
 
                         </div>
-                        <AppControls value={this.state.blendMode} update={(val) => this.handleControlChange("blendMode", val)} />
+                        <AppControls backgroundColor={this.state.backgroundColor} value={this.state.blendMode} update={(id, val) => this.handleControlChange(id, val)} />
                     </div>
                     <div id="canvasContainer"
                         style={{
@@ -60,7 +62,8 @@ class App extends Component {
                             position: "absolute",
                             width: window.innerWidth - 266,
                             height: window.innerHeight - 20,
-                            mixBlendMode: this.state.blendMode
+                            mixBlendMode: this.state.blendMode,
+                            backgroundColor: this.state.backgroundColor
                         }}
                     >
                         {Array.from(Array(this.state.imageLayers).keys()).map((d, i) => {
@@ -78,9 +81,8 @@ class App extends Component {
                                 textAlign: "center",
                                 margin: "auto",
                                 verticalAlign: "middle"
-
                             }}>
-                                <div style={{ opacity: .6, backgroundColor: "#d3d3d3", height: "100vh", paddingTop: "50vh" }}>
+                                <div style={{ opacity: .6, backgroundColor: this.state.backgroundColor, height: "100vh", paddingTop: "50vh" }}>
                                     <div>Use the control panel to upload and manipulate layers of draggable images.</div>
                                 </div>
                             </div>
