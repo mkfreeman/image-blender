@@ -3,10 +3,12 @@ import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import './App.css';
 import ImageLayer from "./ImageLayer";
-import domtoimage from 'dom-to-image'; // didn't work
+import domtoimage from 'dom-to-image';
 import { saveAs } from 'file-saver';
 import Button from '@material-ui/core/Button';
 import AppControls from "./AppControls";
+import Draggable from 'react-draggable';
+
 class App extends Component {
     constructor(props) {
         super(props);
@@ -27,7 +29,6 @@ class App extends Component {
         });
     }
     handleControlChange(id, val) {
-        console.log("change", id, val)
         let newState = {};
         newState[id] = val;
         this.setState(newState);
@@ -36,90 +37,61 @@ class App extends Component {
         return (
             <MuiThemeProvider>
                 <div>
-                    <div id="sideBar" style={{ width: "240px", padding: "10px" }}>
+                    <div id="sideBar" style={{ width: "240px", padding: "10px", height: "95vh" }}>
                         <div id="title">
                             <h1>Image Blender</h1>
                             <p>Layer and blend images</p>
                         </div>
                         <div id="content" >
                             {Array.from(Array(this.state.imageLayers).keys()).map((d, i) => {
-                                return (<ImageLayer key={d} onAdd={() => this.addLayer()} outputCanvas={"canvas" + i} />)
+                                return (<ImageLayer imageNum={d} key={d} onAdd={() => this.addLayer()} outputCanvas={"canvas" + i} />)
                             })
                             }
+                            <hr></hr>
+
                         </div>
                         <AppControls value={this.state.blendMode} update={(val) => this.handleControlChange("blendMode", val)} />
                     </div>
-                    <div id="canvasContainer" style={{ top: '0px', left: '250px', position: "absolute", mixBlendMode: this.state.blendMode }}>
+                    <div id="canvasContainer"
+                        style={{
+                            overflow: "hidden",
+                            top: '0px',
+                            left: '266px',
+                            position: "absolute",
+                            width: window.innerWidth - 266,
+                            height: window.innerHeight - 20,
+                            mixBlendMode: this.state.blendMode
+                        }}
+                    >
                         {Array.from(Array(this.state.imageLayers).keys()).map((d, i) => {
                             return (
-                                <canvas key={d} id={"canvas" + i} style={{ position: 'absolute', top: '0px', left: '0px', mixBlendMode: this.state.blendMode }} />
+                                <Draggable key={d} style={{ cursor: "pointer" }}>
+                                    <canvas id={"canvas" + i} style={{ position: 'absolute', top: '0px', left: '0px', mixBlendMode: this.state.blendMode }} />
+                                </Draggable>
                             )
                         })
+                        }
+                        {this.state.imageLayers === 1 &&
+                            <div style={{
+                                width: window.innerWidth * 0.9 - 350,
+                                height: window.innerHeight - 50,
+                                textAlign: "center",
+                                margin: "auto",
+                                verticalAlign: "middle"
+
+                            }}>
+                                <div style={{ opacity: .6, backgroundColor: "#d3d3d3", height: "100vh", paddingTop: "50vh" }}>
+                                    <div>Use the control panel to upload and manipulate layers of draggable images.</div>
+                                </div>
+                            </div>
+
                         }
                     </div>
                     <Button id="download" color="primary" variant="contained" onClick={() => this.download()}>Download</Button>
                 </div>
-            </MuiThemeProvider>
+            </MuiThemeProvider >
         )
     }
-
-
 }
 
 export default App;
-
-// Failed wrestling with different download options!
-
-// htmlToImage.toSvgDataURL(document.getElementById("canvasContainer"))
-//     .then(function (dataUrl) {
-//         var img = new Image();
-//         img.src = dataUrl;
-//         document.body.appendChild(img);
-//     })
-// html2canvas(document.getElementById("canvasContainer"), {
-//     onrendered: function (canvas) {
-//         alert("test2")
-//         // canvas is the final rendered <canvas> element
-//         document.body.appendChild(canvas);
-//         var myImage = canvas.toDataURL("image/png");
-//         window.open(myImage);
-//     },
-//     allowTaint: true
-// });
-// html2canvas(document.getElementById("canvasContainer")).then(function (canvas) {
-//     document.body.appendChild(canvas);
-// });
-
-// html2canvas(document.getElementById("canvasContainer")).then(function (canvas) {
-//     document.body.appendChild(canvas);
-// const imgData = canvas.toDataURL('image/png');
-// var w = window.open('about:blank', 'image from canvas');
-// w.document.write("<img src='" + imgData + "' alt='from canvas'/>");
-
-
-// this.href = imgData;
-// this.click()
-// });
-
-// Works, just not with ref!
-// domtoimage.toPng(document.getElementById("canvasContainer"))
-//     .then(function (dataUrl) {
-//         var img = new Image();
-//         img.src = dataUrl;
-//         document.body.appendChild(img);
-//     })
-//     .catch(function (error) {
-//         console.error('oops, something went wrong!', error);
-//     });
-
-    // setDownloadBlob(linkId, canvasId, filename) {
-//     let canvas = document.getElementById(canvasId);
-//     let link = document.getElementById(linkId);
-
-//     // Convert to blob and download
-//     canvas.toBlob(function (blob) {
-//         let url = URL.createObjectURL(blob);
-//         link.href = url;
-//         link.download = filename;
-//     });
-// }

@@ -107,6 +107,7 @@ class ImageLayer extends Component {
                         toggleValue={this.state.direction}
                         toggleChange={(val) => this.handleControlChange("direction", val)}
                         angleChange={(val) => this.handleControlChange("angle", val)}
+                        imageNum={this.props.imageNum}
                     />
                 }
             </div>

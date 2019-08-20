@@ -1,6 +1,7 @@
 "use strict";
 import React, { Component } from 'react';
 import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
 const options = [
     "normal",
     "multiply",
@@ -24,9 +25,10 @@ class AppControls extends Component {
     render() {
         return (
             <div>
-                <Select value={this.props.value} onChange={(e, val) => this.props.update(e.target.value)}>
+                <InputLabel htmlFor="blend-mode">Blending Technique</InputLabel>
+                <Select name="blend-mode" value={this.props.value} onChange={(e, val) => this.props.update(e.target.value)}>
                     {options.map((d) =>
-                        <option key={d} value={d}>{d}</option>
+                        <option key={d} value={d}>{d.charAt(0).toUpperCase() + d.slice(1)}</option>
                     )}
                 </Select>
             </div>
